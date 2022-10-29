@@ -1,14 +1,16 @@
 <div class="sl-logo"><a href="">Laundry System</a></div>
 <div class="sl-sideleft">
+    <div class="input-group input-group-search">
+        <input type="search" name="search" class="form-control" placeholder="Search">
+        <span class="input-group-btn">
+            <button class="btn"><i class="fa fa-search"></i></button>
+        </span>
+        <!-- input-group-btn -->
+    </div>
+    <!-- input-group -->
+
     <div class="sl-sideleft-menu">
-        <a href="{{ url('/') }}" target="_blank" class="sl-menu-link">
-            <div class="sl-menu-item">
-                <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-                <span class="menu-item-label">Visit Site</span>
-            </div>
-            <!-- menu-item -->
-        </a>
-        <a href="#" class="sl-menu-link active">
+        <a href="{{ route('admin.dashboard') }}" class="sl-menu-link">
             <div class="sl-menu-item">
                 <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
                 <span class="menu-item-label">Dashboard</span>
