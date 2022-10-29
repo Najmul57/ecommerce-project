@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::post('admin/image/update', [AdminController::class, 'adminImageUpdate'])->name('admin.image.update');
     Route::get('admin/password', [AdminController::class, 'adminPassword'])->name('admin.password');
     Route::post('update/password', [AdminController::class, 'updatePssword'])->name('admin.update.password');
+
+    // brands
+    Route::get('all-brand', [BrandController::class, 'index'])->name('brand');
+    Route::post('brand-store', [BrandController::class, 'brandStore'])->name('brand.store');
+    Route::get('brand-edit/{brand_id}', [BrandController::class, 'brandEdit'])->name('brand.edit');
+    Route::post('brand/update', [BrandController::class, 'brandUpdate'])->name('brand.update');
+    Route::get('brand-destroy/{brand_id}', [BrandController::class, 'brandDestroy'])->name('brand.destroy');
 });
 
 // ================================user route==================================
