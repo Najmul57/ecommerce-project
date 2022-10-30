@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +32,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('brand-edit/{brand_id}', [BrandController::class, 'brandEdit'])->name('brand.edit');
     Route::post('brand/update', [BrandController::class, 'brandUpdate'])->name('brand.update');
     Route::get('brand-destroy/{brand_id}', [BrandController::class, 'brandDestroy'])->name('brand.destroy');
+
+    // category
+    Route::get('category', [CategoryController::class, 'index'])->name('category');
+    Route::post('category-store', [CategoryController::class, 'categoryStore'])->name('category.store');
+    Route::get('category-edit/{category_id}', [CategoryController::class, 'categoryEdit'])->name('category.edit');
+    Route::post('category/update', [CategoryController::class, 'categoryUpdate'])->name('category.update');
+    Route::get('category-destroy/{category_id}', [CategoryController::class, 'categoryDestroy'])->name('category.destroy');
+
+    // sub-category
+    Route::get('sub-category', [SubcategoryController::class, 'index'])->name('sub-category');
+    Route::post('subcategory/store', [SubcategoryController::class, 'subcategoryStore'])->name('subcategory.store');
+    Route::get('subcategory-edit/{subcategory_id}', [SubcategoryController::class, 'subcategoryEdit'])->name('subcategory.edit');
+    Route::post('subcategory/update', [SubcategoryController::class, 'subcategoryUpdate'])->name('subcategory.update');
+    Route::get('subcategory-destroy/{subcategory_id}', [SubcategoryController::class, 'subcategoryDestroy'])->name('subcategory.destroy');
 });
 
 // ================================user route==================================
