@@ -49,6 +49,8 @@ class SubcategoryController extends Controller
         return view('admin.subcategory.edit', compact('categories', 'subcategory'));
     }
 
+
+
     public function subcategoryUpdate(Request $request)
     {
         $subcategory_id = $request->id;

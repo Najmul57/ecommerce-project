@@ -39,7 +39,8 @@
             </li>
             <li class="nav-item"><a href="{{ route('sub-category') }}" class="nav-link @yield('sub-category')">Sub
                     Category</a></li>
-            <li class="nav-item"><a href="chart-chartjs.html" class="nav-link">Chart JS</a></li>
+            <li class="nav-item"><a href="{{ route('childcategory') }}"
+                    class="nav-link @yield('childcategory')">Childcategory</a></li>
             <li class="nav-item"><a href="chart-rickshaw.html" class="nav-link">Rickshaw</a></li>
             <li class="nav-item"><a href="chart-sparkline.html" class="nav-link">Sparkline</a></li>
         </ul>

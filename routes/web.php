@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ChildcategoryController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\User\UserController;
@@ -46,6 +47,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('subcategory-edit/{subcategory_id}', [SubcategoryController::class, 'subcategoryEdit'])->name('subcategory.edit');
     Route::post('subcategory/update', [SubcategoryController::class, 'subcategoryUpdate'])->name('subcategory.update');
     Route::get('subcategory-destroy/{subcategory_id}', [SubcategoryController::class, 'subcategoryDestroy'])->name('subcategory.destroy');
+
+    // child-category
+    Route::get('childcategory', [ChildcategoryController::class, 'index'])->name('childcategory');
+    Route::get('subcategory/ajax/{category_id}', [ChildcategoryController::class, 'getSubCat']);
+    Route::post('childcategory/store', [ChildcategoryController::class, 'childcategoryStore'])->name('childcategory.store');
+    Route::get('childcategory-edit/{childcategory_id}', [ChildcategoryController::class, 'childcategoryEdit'])->name('childcategory.edit');
+    Route::post('childcategory/update', [ChildcategoryController::class, 'childcategoryUpdate'])->name('childcategory.update');
+    Route::get('childcategory-destroy/{childcategory_id}', [ChildcategoryController::class, 'childcategoryDestroy'])->name('childcategory.destroy');
 });
 
 // ================================user route==================================
