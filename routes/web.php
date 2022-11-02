@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildcategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\User\UserController;
@@ -67,6 +68,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('product.destroy/{product_id}', [ProductController::class, 'productDestroy'])->name('product.destroy');
     Route::get('product/inactive/{id}', [ProductController::class, 'productInactive'])->name('product.inactive');
     Route::get('product/active/{id}', [ProductController::class, 'productActive'])->name('product.active');
+
+    // slider
+    Route::get('slider', [SliderController::class, 'index'])->name('slider');
+    Route::post('slider/store', [SliderController::class, 'sliderStore'])->name('slider.store');
+    Route::get('slider-edit/{id}', [SliderController::class, 'edit'])->name('slider.edit');
+    Route::post('slider-update', [SliderController::class, 'update'])->name('slider.update');
+    Route::get('slider-delete/{id}', [SliderController::class, 'destroy'])->name('slider.destroy');
+    Route::get('slider/inactive/{id}', [SliderController::class, 'inactive'])->name('slider.inactive');
+    Route::get('slider/active/{id}', [SliderController::class, 'active'])->name('slider.active');
 });
 
 // ================================user route==================================
