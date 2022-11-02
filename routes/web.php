@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildcategoryController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\User\UserController;
@@ -55,6 +56,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin', 'auth'], 'namespace
     Route::get('childcategory-edit/{childcategory_id}', [ChildcategoryController::class, 'childcategoryEdit'])->name('childcategory.edit');
     Route::post('childcategory/update', [ChildcategoryController::class, 'childcategoryUpdate'])->name('childcategory.update');
     Route::get('childcategory-destroy/{childcategory_id}', [ChildcategoryController::class, 'childcategoryDestroy'])->name('childcategory.destroy');
+
+    // product
+    Route::get('add-product', [ProductController::class, 'addProduct'])->name('add-product');
+    Route::post('store-product', [ProductController::class, 'storeProduct'])->name('store-product');
+    Route::get('childcategory/ajax/{subcategory_id}', [ProductController::class, 'getChildCat']);
+    Route::get('manage-product', [ProductController::class, 'manageProduct'])->name('manage-product');
+    Route::get('product.edit/{product_id}', [ProductController::class, 'productEdit'])->name('product.edit');
+    Route::post('update/product', [ProductController::class, 'updateProduct'])->name('update-product');
+    Route::get('product.destroy/{product_id}', [ProductController::class, 'productDestroy'])->name('product.destroy');
+    Route::get('product/inactive/{id}', [ProductController::class, 'productInactive'])->name('product.inactive');
+    Route::get('product/active/{id}', [ProductController::class, 'productActive'])->name('product.active');
 });
 
 // ================================user route==================================

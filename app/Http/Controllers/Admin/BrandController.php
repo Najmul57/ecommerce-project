@@ -58,7 +58,6 @@ class BrandController extends Controller
         $brand_id = $request->id;
         $old_image = $request->old_image;
 
-
         if ($request->file('brand_image')) {
             unlink($old_image);
             $image = $request->file('brand_image');

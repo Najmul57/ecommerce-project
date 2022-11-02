@@ -38,6 +38,10 @@
     <link href="{{ asset('backend') }}/lib/rickshaw/rickshaw.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('backend/lib/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/lib/datatables/jquery.dataTables.css') }}">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" />
+    <link href="{{ asset('backend') }}/lib/summernote/summernote-bs4.css" rel="stylesheet">
+
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
@@ -68,6 +72,7 @@
     <script src="{{ asset('backend') }}/lib/bootstrap/bootstrap.js"></script>
     <script src="{{ asset('backend') }}/lib/jquery-ui/jquery-ui.js"></script>
     <script src="{{ asset('backend') }}/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
 
     {{-- <script src="{{ asset('backend/lib/datatables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('backend/lib/datatables-responsive/responsive.dataTables.scss') }}"></script>
@@ -106,13 +111,33 @@
     <script src="{{ asset('backend') }}/lib/Flot/jquery.flot.pie.js"></script>
     <script src="{{ asset('backend') }}/lib/Flot/jquery.flot.resize.js"></script>
     <script src="{{ asset('backend') }}/lib/flot-spline/jquery.flot.spline.js"></script>
+    <script src="{{ asset('backend') }}/lib/summernote/summernote-bs4.min.js"></script>
+    <script>
+        $(function() {
+            $('#summernote').summernote({
+                height: 150,
+                tooltip: false
+            });
+            $('#summernote2').summernote({
+                height: 150,
+                tooltip: false
+            });
+            $('#summernote3').summernote({
+                height: 150,
+                tooltip: false
+            });
+            $('#summernote4').summernote({
+                height: 150,
+                tooltip: false
+            })
+        });
+    </script>
     <script src="{{ asset('backend') }}/js/starlight.js"></script>
     <script src="{{ asset('backend') }}/js/ResizeSensor.js"></script>
     <script src="{{ asset('backend') }}/js/dashboard.js"></script>
     <script src="{{ asset('backend') }}/lib/highlightjs/highlight.pack.js"></script>
     <script src="{{ asset('backend') }}/lib/select2/js/select2.min.js"></script>
     <script src="{{ asset('backend/lib/toastr/toastr.min.js') }}"></script>
-
     <script>
         @if (Session::has('message'))
             let type = "{{ Session::get('alert-type', 'info') }}"
@@ -186,6 +211,7 @@
 
         });
     </script>
+
 </body>
 
 </html>
