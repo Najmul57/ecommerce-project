@@ -29,14 +29,14 @@ class IndexController extends Controller
         $products = Product::findOrFail($id);
 
         $color = $products->product_color_en;
-        $color_en = explode(',', $color);
+        $product_color_en = explode(',', $color);
 
         $size = $products->product_size_en;
-        $size_en = explode(',', $size);
+        $product_size_en = explode(',', $size);
 
         $related_products = Product::where('category_id', $products->category_id)->orderby('id', 'desc')->get();
         $multi_img = multiImage::where('product_id', $id)->get();
-        return view('frontend.single-product', compact('products', 'multi_img', 'color_en', 'size_en', 'related_products'));
+        return view('frontend.single-product', compact('products', 'multi_img', 'product_color_en', 'product_size_en', 'related_products'));
     }
     public function tagWiseProduct($tag)
     {

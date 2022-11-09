@@ -558,6 +558,7 @@
     <script src="{{ asset('front') }}/assets/js/bootstrap-select.min.js"></script>
     <script src="{{ asset('front') }}/assets/js/wow.min.js"></script>
     <script src="{{ asset('front') }}/assets/js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="{{ asset('backend/lib/toastr/toastr.min.js') }}"></script>
 
     <script>
@@ -667,10 +668,28 @@
                     size: size,
                     quantity: quantity,
                 },
-                url: 'cart/data/store/' + id,
+                url: '/cart/data/store/' + id,
                 success: function(data) {
                     $('#closeModal').click();
-                    console.log(data);
+
+                    // message
+                    const Toastr = Swal.mixin({
+                        toastr: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                    });
+                    if ($.isEmptyObject(data.error)) {
+                        Toastr.fire({
+                            type: 'success',
+                            title: data.success
+                        });
+                    } else {
+                        Toastr.fire({
+                            type: 'error',
+                            title: data.error
+                        })
+                    }
                 }
             })
         }

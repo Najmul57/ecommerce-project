@@ -350,7 +350,7 @@
                             </div><!-- /.gallery-holder -->
                             <div class='col-sm-6 col-md-7 product-info-block'>
                                 <div class="product-info">
-                                    <h1 class="name">{{ $products->product_name_en }}</h1>
+                                    <h1 class="name" id="product_name">{{ $products->product_name_en }}</h1>
                                     <div class="rating-reviews m-t-20">
                                         <div class="row">
                                             <div class="col-sm-3">
@@ -386,23 +386,36 @@
                                     <div class="price-container info-container m-t-20">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <select class="form-select form-select-sm form-control"
-                                                    aria-label=".form-select-sm example">
-                                                    <option selected>Open this select menu</option>
-                                                    @foreach ($color_en as $color)
-                                                        <option value="{{ $color }}">{{ $color }}</option>
-                                                    @endforeach
-                                                </select>
+                                                @if ($products->product_color_en == '')
+                                                @else
+                                                    <div class="form-group">
+                                                        <label for="color"></label>
+                                                        <select class="form-select form-select-sm form-control"
+                                                            id="color" aria-label=".form-select-sm example">
+                                                            <option selected>Open this select menu</option>
+                                                            @foreach ($product_color_en as $color)
+                                                                <option value="{{ $color }}">{{ $color }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                @endif
                                             </div>
                                             <div class="col-sm-6">
-                                                <select class="form-select form-select-sm form-control"
-                                                    aria-label=".form-select-sm example">
-                                                    <option selected>Open this select menu</option>
-                                                    @foreach ($size_en as $size)
-                                                        <option value="{{ $size }}">{{ $size }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
+                                                @if ($products->product_size_en == '')
+                                                @else
+                                                    <div class="form-group">
+                                                        <label for="size"></label>
+                                                        <select class="form-select form-select-sm form-control"
+                                                            id="size" aria-label=".form-select-sm example">
+                                                            <option selected>Open this select menu</option>
+                                                            @foreach ($product_size_en as $size)
+                                                                <option value="{{ $size }}">{{ $size }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div><!-- /.row -->
                                         <div class="row">
@@ -447,14 +460,20 @@
                                                             <div class="arrow minus gradient"><span class="ir"><i
                                                                         class="icon fa fa-sort-desc"></i></span></div>
                                                         </div>
-                                                        <input type="text" value="1">
+                                                        <input type="text" id="qty" value="1"
+                                                            min="1">
                                                     </div>
                                                 </div>
                                             </div>
 
+                                            {{-- <input type="hidden" id="product_name"
+                                                value="{{ $products->product_name_en }}"> --}}
+                                            <input type="hidden" id="product_id" value="{{ $products->id }}">
+
                                             <div class="col-sm-7">
-                                                <a href="#" class="btn btn-primary"><i
-                                                        class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+                                                <button class="btn btn-primary" onclick="addToCart()"><i
+                                                        class="fa fa-shopping-cart inner-right-vs"></i> ADD TO
+                                                    CART</button>
                                             </div>
                                         </div><!-- /.row -->
                                     </div><!-- /.quantity-container -->
