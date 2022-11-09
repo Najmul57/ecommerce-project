@@ -49,11 +49,11 @@ class UserController extends Controller
     {
         $old_image = $request->old_image;
 
-        if (User::findOrFail(Auth::id())->image == 'front/assets/images/user/avatar.jpeg') {
+        if (User::findOrFail(Auth::id())->image == 'frontend/assets/images/user/avatar.jpeg') {
             $image = $request->file('image');
             $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->resize(300, 300)->save('front/assets/images/user/' . $name_gen);
-            $save_url = 'front/assets/images/user/' . $name_gen;
+            Image::make($image)->resize(300, 300)->save('frontend/assets/images/user/' . $name_gen);
+            $save_url = 'frontend/assets/images/user/' . $name_gen;
             User::findOrFail(Auth::id())->update([
                 'image' => $save_url
             ]);
@@ -67,8 +67,8 @@ class UserController extends Controller
 
             $image = $request->file('image');
             $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
-            Image::make($image)->resize(300, 300)->save('front/assets/images/user/' . $name_gen);
-            $save_url = 'front/assets/images/user/' . $name_gen;
+            Image::make($image)->resize(300, 300)->save('frontend/assets/images/user/' . $name_gen);
+            $save_url = 'frontend/assets/images/user/' . $name_gen;
             User::findOrFail(Auth::id())->update([
                 'image' => $save_url
             ]);

@@ -148,8 +148,14 @@ class ProductController extends Controller
         $product = Product::findOrFail($product_id);
         $img = $product->product_thumbnail;
         unlink($img);
-
         Product::findOrFail($product_id)->delete();
+
+        $images = multiImage::where('product_id', $product_id)->get();
+        foreach ($images as $image) {
+            unlink($image->product_photo);
+            multiImage::where('product_id', $product_id)->delete();
+        }
+
         $notification = array(
             'message' => 'Product Delete Success!',
             'alert-type' => 'success'

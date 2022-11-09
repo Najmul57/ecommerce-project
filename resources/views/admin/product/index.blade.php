@@ -39,16 +39,16 @@
                                             <td>{{ $item->selling_price }}</td>
                                             <td>{{ $item->product_qty }}</td>
                                             <td>
-                                                @if ($item->discount_price == null)
-                                                    <span class="badge badge-pill badge-success">no</span>
-                                                @else
+                                                {{-- @if ($item->discount_price == null)
+                                                    <span class="badge badge-pill badge-success">no</span> --}}
+                                                {{-- @else
                                                     @php
                                                         $amount = $item->selling_price - $item->discount_price;
                                                         $discount = ($amount / $item->selling_price) * 100;
                                                     @endphp
                                                     <span class="badge badge-pill badge-success">{{ round($discount) }}
                                                         %</span>
-                                                @endif
+                                                @endif --}}
                                             </td>
                                             <td>
                                                 @if ($item->status == 1)
@@ -67,12 +67,10 @@
                                                     class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                                 @if ($item->status == 1)
                                                     <a href="{{ route('product.inactive', $item->id) }}"
-                                                        class="btn btn-sm btn-danger" title="inactive"><i
-                                                            class="fa fa-arrow-down"></i></a>
+                                                        class="btn btn-sm btn-danger"><i class="fa fa-arrow-down"></i></a>
                                                 @else
-                                                    <a href="{{ route('product.active', $item->id) }}"
-                                                        class="btn btn-sm btn-info" title="active"><i
-                                                            class="fa fa-arrow-up"></i></a>
+                                                    <a href="{{ route('product.inactive', $item->id) }}"
+                                                        class="btn btn-sm btn-info"><i class="fa fa-arrow-up"></i></a>
                                                 @endif
                                             </td>
                                         </tr>

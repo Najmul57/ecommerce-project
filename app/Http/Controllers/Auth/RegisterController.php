@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    
+
 
     use RegistersUsers;
 
@@ -21,12 +21,12 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-    protected function redirectTo(){
-        if (Auth()->user()->role_id ==1 ) {
+    protected function redirectTo()
+    {
+        if (Auth()->user()->role_id == 1) {
             return route('admin.dashboard');
-
-        }elseif (Auth()->user()->role_id ==2 ) {
-        return route('user.dashboard');
+        } elseif (Auth()->user()->role_id == 2) {
+            return route('user.dashboard');
         }
     }
 
@@ -68,7 +68,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'role_id' => 2,
-            'image'=>'front/assets/images/user/avatar.jpeg',
+            'image' => 'frontend/assets/images/user/avatar.jpeg',
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

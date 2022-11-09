@@ -7,7 +7,9 @@ use App\Http\Controllers\Admin\ChildcategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubcategoryController;
-use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\frontend\IndexController;
+use App\Http\Controllers\frontend\LanguageController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -88,3 +90,20 @@ Route::group(['prefix' => 'user', 'middleware' => ['user', 'auth'], 'namespace' 
     Route::get('user/password', [UserController::class, 'userPassword'])->name('user.password');
     Route::post('update/password', [UserController::class, 'updatePssword'])->name('update.password');
 });
+
+
+
+// ================================frontend route==================================
+Route::get('language/bangla', [LanguageController::class, 'bangla'])->name('language.bangla');
+Route::get('language/english', [LanguageController::class, 'english'])->name('language.english');
+
+
+Route::get('single/product/{id}', [IndexController::class, 'singleProduct'])->name('single.product');
+Route::get('product/tag/{tag}', [IndexController::class, 'tagWiseProduct']);
+Route::get('subcategory/product/{id}', [IndexController::class, 'subcategoryProduct'])->name('subcategory.product');
+
+// product view with ajax
+Route::get('product/view/modal/{id}', [IndexController::class, 'productView']);
+
+// cart
+Route::post('cart/data/store/{id}', [CartController::class, 'addToCart']);
