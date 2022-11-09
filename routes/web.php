@@ -107,3 +107,9 @@ Route::get('product/view/modal/{id}', [IndexController::class, 'productView']);
 
 // cart
 Route::post('cart/data/store/{id}', [CartController::class, 'addToCart']);
+
+// mini cart
+Route::get('/product/mini/cart/', [CartController::class, 'miniCart']);
+
+// cart remove
+Route::get('/mini/cart/product-remove/{rowId}', [CartController::class, 'cartRemove']);

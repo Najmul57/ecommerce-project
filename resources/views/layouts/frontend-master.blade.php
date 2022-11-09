@@ -174,11 +174,12 @@
                                     <div class="basket">
                                         <i class="glyphicon glyphicon-shopping-cart"></i>
                                     </div>
-                                    <div class="basket-item-count"><span class="count">2</span></div>
+                                    <div class="basket-item-count"><span class="count" id="cartQty"></span></div>
                                     <div class="total-price-basket">
-                                        <span class="lbl">cart -</span>
+                                        {{-- <span class="lbl">cart -</span> --}}
                                         <span class="total-price">
-                                            <span class="sign">$</span><span class="value">600.00</span>
+                                            <span class="sign">$</span><span class="value"
+                                                id="cartSubTotal"></span>
                                         </span>
                                     </div>
 
@@ -187,33 +188,15 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <div class="cart-item product-summary">
-                                        <div class="row">
-                                            <div class="col-xs-4">
-                                                <div class="image">
-                                                    <a href="detail.html"><img
-                                                            src="{{ asset('front') }}/assets/images/cart.jpg"
-                                                            alt=""></a>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-7">
-
-                                                <h3 class="name"><a href="index8a95.html?page-detail">Simple
-                                                        Product</a></h3>
-                                                <div class="price">$600.00</div>
-                                            </div>
-                                            <div class="col-xs-1 action">
-                                                <a href="#"><i class="fa fa-trash"></i></a>
-                                            </div>
-                                        </div>
-                                    </div><!-- /.cart-item -->
-                                    <div class="clearfix"></div>
+                                    {{-- mini cart start with ajax --}}
+                                    <div id="miniCart"></div>
                                     <hr>
 
                                     <div class="clearfix cart-total">
                                         <div class="pull-right">
 
-                                            <span class="text">Sub Total :</span><span class='price'>$600.00</span>
+                                            <span class="text">Sub Total :</span><span class='price'
+                                                id="cartSubTotal"></span>
 
                                         </div>
                                         <div class="clearfix"></div>
@@ -227,7 +210,7 @@
                             </ul><!-- /.dropdown-menu-->
                         </div><!-- /.dropdown-cart -->
 
-                        <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->
+                        <!-- ========================== SHOPPING CART DROPDOWN : END============================= -->
                     </div><!-- /.top-cart-row -->
                 </div><!-- /.row -->
 
@@ -320,11 +303,9 @@
             </div><!-- /.container-class -->
 
         </div><!-- /.header-nav -->
-        <!-- ============================================== NAVBAR : END ============================================== -->
-
+        <!-- =============================== NAVBAR : END =============================== -->
     </header>
-
-    <!-- ============================================== HEADER : END ============================================== -->
+    <!-- ============================== HEADER : END ================================ -->
     <div class="body-content outer-top-xs" id="top-banner-and-menu">
         <div class="container">
 
@@ -339,11 +320,7 @@
             <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
         </div><!-- /.container -->
     </div><!-- /#top-banner-and-menu -->
-
-
-
-
-    <!-- ============================================================= FOOTER ============================================================= -->
+    <!-- ============================ FOOTER ==================================== -->
     <footer id="footer" class="footer color-bg">
         <div class="footer-bottom">
             <div class="container">
@@ -479,7 +456,7 @@
             </div>
         </div>
     </footer>
-    <!-- ============================================================= FOOTER : END============================================================= -->
+    <!-- =============================== FOOTER : END===================================== -->
 
     <!-- Modal -->
     <div class="modal fade" id="cart_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -670,8 +647,80 @@
                 },
                 url: '/cart/data/store/' + id,
                 success: function(data) {
+                    miniCart();
                     $('#closeModal').click();
 
+                    // message
+                    const Toastr = Swal.mixin({
+                        toastr: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                    });
+                    if ($.isEmptyObject(data.error)) {
+                        Toastr.fire({
+                            type: 'success',
+                            title: data.success
+                        });
+                    } else {
+                        Toastr.fire({
+                            type: 'error',
+                            title: data.error
+                        })
+                    }
+                }
+            })
+        }
+    </script>
+
+    <script type="text/javascript">
+        function miniCart() {
+            $.ajax({
+                type: 'get',
+                url: '/product/mini/cart/',
+                dataType: 'json',
+                success: function(response) {
+                    $('span[id="cartSubTotal"]').text(response.cartTotal);
+                    $('#cartQty').text(response.cartQty);
+                    let miniCart = ''
+                    $.each(response.carts, function(key, value) {
+                        miniCart += `
+                            <div class='cart-item product-summary'>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <div class="image">
+                                            <a href='detail.html'><img src='/${value.options.image}' alt=''></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <h3 class="name"><a href="index8a95.html?page-detail">${ value.name }</a></h3>
+                                        <div class="price">${value.price}</div>
+                                        </div>
+                                        <div class="col-xs-1 action">
+                                        <button type='submit' id="${value.rowId}" onclick='miniCartRemove(this.id)'>
+                                            <i class="fa fa-trash"></i>    
+                                        </button>
+                                        </div>
+                                    </div>
+                                </div><!-- /.cart-item -->
+                            <div class="clearfix"></div>
+                        `
+                    })
+                    $('#miniCart').html(miniCart);
+                }
+            })
+        }
+        miniCart();
+
+        // mini cart remove
+        function miniCartRemove(rowId) {
+            // alert(rowId);
+            $.ajax({
+                type: 'get',
+                url: '/mini/cart/product-remove/' + rowId,
+                dataType: 'json',
+                success: function(response) {
+                    miniCart();
                     // message
                     const Toastr = Swal.mixin({
                         toastr: true,
@@ -698,3 +747,6 @@
 </body>
 
 </html>
+
+
+<
