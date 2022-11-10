@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\frontend\IndexController;
 use App\Http\Controllers\frontend\LanguageController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\WishlistController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -113,3 +114,6 @@ Route::get('/product/mini/cart/', [CartController::class, 'miniCart']);
 
 // cart remove
 Route::get('/mini/cart/product-remove/{rowId}', [CartController::class, 'cartRemove']);
+
+// wishlist
+Route::post('/add-to-wishlist/{id}', [CartController::class, 'addToWishlist']);

@@ -694,7 +694,7 @@
                                     </div>
                                     <div class="col-xs-7">
                                         <h3 class="name"><a href="index8a95.html?page-detail">${ value.name }</a></h3>
-                                        <div class="price">${value.price}</div>
+                                        <div class="price">${value.price} * ${value.qty}</div>
                                         </div>
                                         <div class="col-xs-1 action">
                                         <button type='submit' id="${value.rowId}" onclick='miniCartRemove(this.id)'>
@@ -721,6 +721,38 @@
                 dataType: 'json',
                 success: function(response) {
                     miniCart();
+                    // message
+                    const Toastr = Swal.mixin({
+                        toastr: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                    });
+                    if ($.isEmptyObject(data.error)) {
+                        Toastr.fire({
+                            type: 'success',
+                            title: data.success
+                        });
+                    } else {
+                        Toastr.fire({
+                            type: 'error',
+                            title: data.error
+                        })
+                    }
+                }
+            })
+        }
+    </script>
+
+    <script type="text/javascript">
+        function addToWithlist(id) {
+
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                url: "{{ url('/add-to-wishlist/') }}/" + id,
+                success: function(data) {
+
                     // message
                     const Toastr = Swal.mixin({
                         toastr: true,

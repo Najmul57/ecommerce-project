@@ -529,7 +529,7 @@
                                                 <li class="add-cart-button btn-group">
                                                     <button data-toggle="modal" data-target="#cart_modal"
                                                         class="btn btn-primary icon" data-toggle="dropdown"
-                                                        id="{{ $product->id }}" id="" type="button"
+                                                        id="{{ $product->id }}" type="button"
                                                         onclick="productView(this.id)">
                                                         <i class="fa fa-shopping-cart"></i>
                                                     </button>
@@ -539,9 +539,10 @@
                                                 </li>
 
                                                 <li class="lnk wishlist">
-                                                    <a class="add-to-cart" href="detail.html" title="Wishlist">
+                                                    <button class="add-to-cart" type="button" title="Wishlist"
+                                                        id="{{ $product->id }}" onclick="addToWithlist(this.id)">
                                                         <i class="icon fa fa-heart"></i>
-                                                    </a>
+                                                    </button>
                                                 </li>
 
                                                 <li class="lnk">
